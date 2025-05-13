@@ -40,7 +40,8 @@ const HomepageStyles = StyleSheet.create({
   },
   filterText: {
     fontSize: 16,
-    color: '#666',
+    color: '#b39369',
+    fontWeight: 600,
   },
   listContainer: {
     paddingBottom: 80,
@@ -66,7 +67,7 @@ const HomepageStyles = StyleSheet.create({
   price: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#b39369',
     marginBottom: 4,
   },
   category: {
@@ -160,7 +161,7 @@ const HomepageStyles = StyleSheet.create({
     color: '#666',
   },
   activeNavText: {
-    color: '#000',
+    color: '#b39369',
     fontWeight: 'bold',
   },
   spacer: {
@@ -175,14 +176,13 @@ const HomepageStyles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
   postIconText: {
-    color: '#fff',
+    color: '#b39369',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 });
 

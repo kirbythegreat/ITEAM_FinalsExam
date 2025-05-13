@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Image } from 'react-native';
 import HomepageStyles from '../styles/HomepageStyles';
 import { getListings } from '../../api';
@@ -13,6 +13,8 @@ const Homepage = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [lastListingId, setLastListingId] = useState('');
   const [lastRowValue, setLastRowValue] = useState('');
+  const debounceTimeout = useRef(null);
+
 
   const API_PARAMS = {
     categories: [],
@@ -87,15 +89,20 @@ const Homepage = () => {
     }
   };
 
-  const handleSearch = (text) => {
-    setSearchQuery(text);
-    const timer = setTimeout(() => {
-      if (text.length === 0 || text.length > 2) {
-        fetchData(true);
-      }
-    }, 500);
-    return () => clearTimeout(timer);
-  };
+const handleSearch = (text) => {
+  setSearchQuery(text);
+
+  if (debounceTimeout.current) {
+    clearTimeout(debounceTimeout.current);
+  }
+
+  debounceTimeout.current = setTimeout(() => {
+    if (text.length === 0 || text.length > 2) {
+      fetchData(true);
+    }
+  }, 500);
+};
+
 
   useEffect(() => {
     fetchData(true);
@@ -116,8 +123,20 @@ const Homepage = () => {
       )}
       
       <Text style={HomepageStyles.price}>{item.currency} {item.selling_price}</Text>
-      <Text style={HomepageStyles.category}>{item.brand} ({item.category})</Text>
-      <Text style={HomepageStyles.category}>{item.model}</Text>
+      <Text 
+        style={HomepageStyles.category}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+        >
+        {item.brand} ({item.category})
+        </Text>
+      <Text 
+        style={HomepageStyles.category}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+        >
+        {item.model}
+      </Text>
       <View style={HomepageStyles.sellerContainer}>
         {item.lister_image ? (
           <Image 
@@ -132,7 +151,13 @@ const Homepage = () => {
             </Text>
           </View>
         )}
-        <Text style={HomepageStyles.sellerName}>{item.lister_name}</Text>
+        <Text 
+            style={HomepageStyles.sellerName}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            >
+            {item.lister_name}
+        </Text>
       </View>
     </View>
   );
@@ -242,7 +267,7 @@ const Homepage = () => {
           testID="post-button"
         >
           <View style={HomepageStyles.postIconCircle}>
-            <Text style={HomepageStyles.postIconText}>Post</Text>
+            <Text style={HomepageStyles.postIconText}>XURE</Text>
           </View>
         </TouchableOpacity>
       </View>
