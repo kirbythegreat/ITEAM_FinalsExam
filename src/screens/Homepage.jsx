@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Image } from 'react-native';
 import HomepageStyles from '../styles/HomepageStyles';
 import { getListings } from '../../api';
 
-const Homepage = () => {
+const Homepage = ({ route, navigation }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,7 +15,6 @@ const Homepage = () => {
   const [lastListingId, setLastListingId] = useState('');
   const [lastRowValue, setLastRowValue] = useState('');
   const debounceTimeout = useRef(null);
-
 
   const API_PARAMS = {
     categories: [],
@@ -109,58 +109,57 @@ const handleSearch = (text) => {
   }, []);
 
   const renderItem = ({ item }) => (
-    <View style={HomepageStyles.itemContainer} testID={`item-${item.listing_id}`}>
-      {item.item_image ? (
+  <TouchableOpacity
+    style={HomepageStyles.itemContainer}
+    testID={`item-${item.listing_id}`}
+    onPress={() => navigation.navigate('Details', {
+      item_id: item.item_id,
+      listing_id: item.listing_id,
+      current_owner_id: item.owner_id, // ⚠️ make sure this field exists in item
+      current_owner_type: item.owner_type, // ⚠️ same here
+    })}
+
+  >
+    {item.item_image ? (
+      <Image 
+        source={{ uri: item.item_image }} 
+        style={HomepageStyles.itemImage}
+        resizeMode="cover"
+      />
+    ) : (
+      <View style={[HomepageStyles.itemImage, HomepageStyles.placeholderImage]}>
+        <Text>No Image</Text>
+      </View>
+    )}
+
+    <Text style={HomepageStyles.price}>{item.currency} {item.selling_price}</Text>
+    <Text style={HomepageStyles.category} numberOfLines={1} ellipsizeMode="tail">
+      {item.brand} ({item.category})
+    </Text>
+    <Text style={HomepageStyles.category} numberOfLines={1} ellipsizeMode="tail">
+      {item.model}
+    </Text>
+    <View style={HomepageStyles.sellerContainer}>
+      {item.lister_image ? (
         <Image 
-          source={{ uri: item.item_image }} 
-          style={HomepageStyles.itemImage}
+          source={{ uri: item.lister_image }} 
+          style={HomepageStyles.sellerImage}
           resizeMode="cover"
         />
       ) : (
-        <View style={[HomepageStyles.itemImage, HomepageStyles.placeholderImage]}>
-          <Text>No Image</Text>
+        <View style={[HomepageStyles.sellerImage, HomepageStyles.placeholderSellerImage]}>
+          <Text style={HomepageStyles.sellerInitial}>
+            {item.lister_name ? item.lister_name.charAt(0) : '?'}
+          </Text>
         </View>
       )}
-      
-      <Text style={HomepageStyles.price}>{item.currency} {item.selling_price}</Text>
-      <Text 
-        style={HomepageStyles.category}
-        numberOfLines={1}
-        ellipsizeMode="tail"
-        >
-        {item.brand} ({item.category})
-        </Text>
-      <Text 
-        style={HomepageStyles.category}
-        numberOfLines={1}
-        ellipsizeMode="tail"
-        >
-        {item.model}
+      <Text style={HomepageStyles.sellerName} numberOfLines={1} ellipsizeMode="tail">
+        {item.lister_name}
       </Text>
-      <View style={HomepageStyles.sellerContainer}>
-        {item.lister_image ? (
-          <Image 
-            source={{ uri: item.lister_image }} 
-            style={HomepageStyles.sellerImage}
-            resizeMode="cover"
-          />
-        ) : (
-          <View style={[HomepageStyles.sellerImage, HomepageStyles.placeholderSellerImage]}>
-            <Text style={HomepageStyles.sellerInitial}>
-              {item.lister_name ? item.lister_name.charAt(0) : '?'}
-            </Text>
-          </View>
-        )}
-        <Text 
-            style={HomepageStyles.sellerName}
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            >
-            {item.lister_name}
-        </Text>
-      </View>
     </View>
-  );
+  </TouchableOpacity>
+);
+
 
   const renderFooter = () => {
     if (!loadingMore) return null;
