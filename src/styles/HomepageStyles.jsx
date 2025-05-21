@@ -184,6 +184,188 @@ const HomepageStyles = StyleSheet.create({
     color: '#b39369',
     fontSize: 16,
   },
+overlay: {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.2)', // semi-transparent black
+  zIndex: 1,
+},
+
+
+  sidebar: {
+    width:  '75%',
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingVertical: 24,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: -2, height: 0 },
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  overlayTouchable: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#00000044',
+  },
+  sidebarHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  sidebarTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#b39369',
+  },
+  closeButton: {
+    fontSize: 28,
+    color: '#888',
+    paddingHorizontal: 10,
+  },
+  filterSection: {
+    marginBottom: 24,
+  },
+  filterSubtitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 12,
+  },
+  sortOptions: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    columnGap: 12,
+    rowGap: 8,
+  },
+  sortOption: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    backgroundColor: '#f0f0f0',
+  },
+  sortOptionActive: {
+    backgroundColor: '#b39369',
+  },
+  sortOptionText: {
+    color: '#333',
+    fontSize: 14,
+  },
+  sortOptionTextActive: {
+    color: '#fff',
+  },
+  categoryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    columnGap: 8,
+    rowGap: 8,
+  },
+  categoryButton: {
+    backgroundColor: '#f4f4f4',
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 18,
+  },
+  categoryButtonActive: {
+    backgroundColor: '#b39369',
+  },
+  categoryButtonText: {
+    fontSize: 13,
+    color: '#333',
+  },
+  categoryButtonTextActive: {
+    color: '#fff',
+  },
+  rangeGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    columnGap: 8,
+    rowGap: 8,
+  },
+  rangeButton: {
+    backgroundColor: '#f4f4f4',
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 18,
+  },
+  rangeButtonText: {
+    fontSize: 13,
+    color: '#333',
+  },
+filterActions: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingHorizontal: 16,
+  paddingVertical: 20,
+  borderTopWidth: 1,
+  borderColor: '#ddd',
+  backgroundColor: '#fff',
+},
+
+clearButton: {
+  flex: 1,
+  marginRight: 8,
+  padding: 12,
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: '#b39369',
+  backgroundColor: '#fff',
+  alignItems: 'center',
+},
+
+clearButtonText: {
+  color: '#b39369',
+  fontWeight: 'bold',
+},
+
+
+applyButton: {
+  flex: 1,
+  marginLeft: 8,
+  padding: 12,
+  borderRadius: 8,
+  backgroundColor: '#b39369',
+  alignItems: 'center',
+},
+
+applyButtonText: {
+  color: '#fff',
+  fontWeight: 'bold',
+},
+
+  clearButton: {
+    flex: 1,
+    backgroundColor: '#eee',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    marginRight: 8,
+  },
+  clearButtonText: {
+    color: '#666',
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  applyButton: {
+    flex: 1,
+    backgroundColor: '#b39369',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+  },
+  applyButtonText: {
+    color: '#fff',
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+
 });
+
+
 
 export default HomepageStyles;

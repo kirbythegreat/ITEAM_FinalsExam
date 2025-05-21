@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Image } from 'react-native';
+
+import { View, Text, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Image, RefreshControl, Animated, Dimensions, ScrollView} from 'react-native';
 import HomepageStyles from '../styles/HomepageStyles';
 import { getListings } from '../../api';
+import Modal from 'react-native-modal';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+
 
 const Homepage = ({ route, navigation }) => {
   const [items, setItems] = useState([]);
@@ -15,6 +19,34 @@ const Homepage = ({ route, navigation }) => {
   const [lastListingId, setLastListingId] = useState('');
   const [lastRowValue, setLastRowValue] = useState('');
   const debounceTimeout = useRef(null);
+
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [sortOrder, setSortOrder] = useState('ASC');
+  const [minValue, setMinValue] = useState('');
+  const [maxValue, setMaxValue] = useState('');
+
+const screenWidth = Dimensions.get('window').width;
+const slideAnim = useRef(new Animated.Value(screenWidth)).current; 
+
+const openFilterSidebar = () => {
+  setFilterVisible(true);
+  Animated.timing(slideAnim, {
+    toValue: screenWidth * 0.25, // Sidebar will occupy the right 75%
+    duration: 300,
+    useNativeDriver: false,
+  }).start();
+};
+
+const closeFilterSidebar = () => {
+  Animated.timing(slideAnim, {
+    toValue: screenWidth, // Slide it off-screen again
+    duration: 300,
+    useNativeDriver: false,
+  }).start(() => setFilterVisible(false));
+};
+
+
 
   const API_PARAMS = {
     categories: [],
@@ -108,6 +140,19 @@ const handleSearch = (text) => {
     fetchData(true);
   }, []);
 
+const renderSkeletonItem = (_, index) => (
+  <View key={index} style={HomepageStyles.itemContainer}>
+    <View style={[HomepageStyles.itemImage, { backgroundColor: '#ccc' }]} />
+    <View style={{ height: 20, backgroundColor: '#ddd', marginVertical: 5, borderRadius: 4 }} />
+    <View style={{ height: 16, backgroundColor: '#eee', marginBottom: 4, borderRadius: 4 }} />
+    <View style={{ height: 16, backgroundColor: '#eee', borderRadius: 4 }} />
+    <View style={[HomepageStyles.sellerContainer, { marginTop: 10 }]}>
+      <View style={[HomepageStyles.sellerImage, { backgroundColor: '#ccc' }]} />
+      <View style={{ width: 60, height: 12, backgroundColor: '#ddd', marginLeft: 8, borderRadius: 4 }} />
+    </View>
+  </View>
+);
+
   const renderItem = ({ item }) => (
   <TouchableOpacity
     style={HomepageStyles.itemContainer}
@@ -173,13 +218,87 @@ const handleSearch = (text) => {
     );
   };
 
-  if (loading && !refreshing) {
-    return (
-      <View style={HomepageStyles.loadingContainer}>
-        <Text style={HomepageStyles.loadingText}>Loading Products...</Text>
-      </View>
-    );
+ if (loading || refreshing) {
+  return (
+<ScrollView
+  style={HomepageStyles.container}
+  refreshControl={
+    <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
   }
+>
+  <SkeletonPlaceholder borderRadius={4}>
+    {/* Header Title */}
+    <View style={{ width: '100%', height: 50, justifyContent: 'center', paddingHorizontal: 20 }}>
+      <View style={{ width: 120, height: 24 }} />
+    </View>
+
+    {/* Search Bar */}
+    <View style={{ width: '90%', height: 40, borderRadius: 8, marginHorizontal: '5%', marginBottom: 20 }} />
+
+    {/* Daily Discovery + Filter Text */}
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 10 }}>
+      <View style={{ width: 150, height: 20 }} />
+      <View style={{ width: 60, height: 20 }} />
+    </View>
+
+    {/* Grid Items */}
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingHorizontal: 20 }}>
+      {[...Array(4)].map((_, index) => (
+        <View key={index} style={{ width: '47%', marginBottom: 20 }}>
+          <View style={{ width: '100%', height: 120, borderRadius: 8 }} />
+          <View style={{ width: '60%', height: 16, marginTop: 8 }} />
+          <View style={{ width: '90%', height: 14, marginTop: 4 }} />
+          <View style={{ width: '50%', height: 14, marginTop: 4 }} />
+
+          {/* Seller row */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+            <View style={{ width: 30, height: 30, borderRadius: 15 }} />
+            <View style={{ width: 60, height: 12, marginLeft: 8 }} />
+          </View>
+        </View>
+      ))}
+    </View>
+
+    {/* Footer */}
+{/* Footer Navigation Skeleton */}
+<View style={{ paddingTop: 20, height: 80, justifyContent: 'center' }}>
+  <View style={{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingHorizontal: 20
+  }}>
+    {/* Left two nav texts */}
+    <View style={{ width: 50, height: 12 }} />
+    <View style={{ width: 50, height: 12 }} />
+
+    {/* Spacer for center button */}
+    <View style={{ width: 50 }} />
+
+    {/* Right two nav texts */}
+    <View style={{ width: 50, height: 12 }} />
+    <View style={{ width: 50, height: 12 }} />
+  </View>
+
+  {/* Floating Circular Button (centered) */}
+  <View style={{
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 20,
+    width: 40,
+    height: 40,
+    borderRadius: 30
+  }} />
+</View>
+
+  </SkeletonPlaceholder>
+</ScrollView>
+
+
+  );
+}
+
 
   return (
     <View style={HomepageStyles.container} testID="homepage">
@@ -207,14 +326,140 @@ const handleSearch = (text) => {
 
       <View style={HomepageStyles.sectionHeader}>
         <Text style={HomepageStyles.sectionTitle}>Daily Discovery</Text>
-        <TouchableOpacity 
-          onPress={() => console.log('Filter pressed')}
-          testID="filter-button"
-        >
-          <Text style={HomepageStyles.filterText}>Filter</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={openFilterSidebar}>
+            <Text style={HomepageStyles.filterText}>Filter</Text>
+          </TouchableOpacity>
       </View>
 
+      {filterVisible && (
+            
+        <View style={HomepageStyles.overlay}>
+          
+          <TouchableOpacity
+            style={HomepageStyles.overlayTouchable}
+            onPress={closeFilterSidebar}
+            activeOpacity={1}
+          />
+          <Animated.View style={[HomepageStyles.sidebar, { left: slideAnim, height: '100%', position: 'absolute', top: 0 }]}>
+            <ScrollView>
+            <View style={HomepageStyles.filterSection}>
+              <Text style={HomepageStyles.filterSubtitle}>Sort</Text>
+              <View style={HomepageStyles.sortOptions}>
+                <TouchableOpacity
+                  style={[
+                    HomepageStyles.sortOption,
+                    sortOrder === 'ASC' && HomepageStyles.sortOptionActive
+                  ]}
+                  onPress={() => setSortOrder('ASC')}
+                >
+                  <Text style={[
+                    HomepageStyles.sortOptionText,
+                    sortOrder === 'ASC' && HomepageStyles.sortOptionTextActive
+                  ]}>
+                    ASC
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    HomepageStyles.sortOption,
+                    sortOrder === 'DESC' && HomepageStyles.sortOptionActive
+                  ]}
+                  onPress={() => setSortOrder('DESC')}
+                >
+                  <Text style={[
+                    HomepageStyles.sortOptionText,
+                    sortOrder === 'DESC' && HomepageStyles.sortOptionTextActive
+                  ]}>
+                    DESC
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={HomepageStyles.filterSection}>
+              <Text style={HomepageStyles.filterSubtitle}>Category</Text>
+              <View style={HomepageStyles.categoryGrid}>
+                {[
+                  'Bags', 'Shoes', 'Jewelry', 'Toys', 
+                  'Watches', 'Automotive and Perks', 'Electronics and Gadgets', 'Clothing',
+                  'Eyewear', 'Musical Instrument', 'Trading Cards', 'Artworks',
+                  'Race Cone', 'Books and Comic Books', 'Stamps', 'Antiques',
+                  'Music', 'Movie', 'Sports', 'Others'
+                ].map(category => (
+                  <TouchableOpacity
+                    key={category}
+                    style={[
+                      HomepageStyles.categoryButton,
+                      selectedCategories.includes(category) && HomepageStyles.categoryButtonActive
+                    ]}
+                    onPress={() => {
+                      setSelectedCategories(prev =>
+                        prev.includes(category)
+                          ? prev.filter(c => c !== category)
+                          : [...prev, category]
+                      );
+                    }}
+                  >
+                    <Text style={[
+                      HomepageStyles.categoryButtonText,
+                      selectedCategories.includes(category) && HomepageStyles.categoryButtonTextActive
+                    ]}>
+                      {category}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+
+            <View style={HomepageStyles.filterSection}>
+              <Text style={HomepageStyles.filterSubtitle}>Value Range</Text>
+              <View style={HomepageStyles.rangeGrid}>
+                {['1 - 5k', '5k - 10k', '10k - 50k', '50k -'].map(range => (
+                  <TouchableOpacity
+                    key={range}
+                    style={HomepageStyles.rangeButton}
+                    onPress={() => {
+                      // Parse the range and set min/max values
+                      const [min, max] = range.split(' - ');
+                      setMinValue(min.replace('k', '000'));
+                      setMaxValue(max === '-' ? '' : max.replace('k', '000'));
+                    }}
+                  >
+                    <Text style={HomepageStyles.rangeButtonText}>{range}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+
+            <View style={HomepageStyles.filterActions}>
+              <TouchableOpacity 
+                style={HomepageStyles.clearButton}
+                onPress={() => {
+                  setSelectedCategories([]);
+                  setMinValue('');
+                  setMaxValue('');
+                  setSortOrder('ASC');
+                }}
+              >
+                <Text style={HomepageStyles.clearButtonText}>Clear</Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={HomepageStyles.applyButton}
+                onPress={() => {
+                  closeFilterSidebar();
+                  fetchData(true);
+                }}
+              >
+                <Text style={HomepageStyles.applyButtonText}>Apply</Text>
+              </TouchableOpacity>
+            </View>
+            </ScrollView>
+          </Animated.View>
+        </View>
+       
+      )}
+
+      
       <FlatList
         data={items}
         renderItem={renderItem}
