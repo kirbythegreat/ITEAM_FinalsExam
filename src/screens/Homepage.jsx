@@ -115,9 +115,11 @@ const handleSearch = (text) => {
     onPress={() => navigation.navigate('Details', {
       item_id: item.item_id,
       listing_id: item.listing_id,
-      current_owner_id: item.owner_id, // ⚠️ make sure this field exists in item
-      current_owner_type: item.owner_type, // ⚠️ same here
+      current_owner_id: item.owner_id,
+      current_owner_type: item.owner_type,
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJuYmYiOjE3NDYxOTI1MTQsImV4cCI6MTc0ODc4NDUxNCwiaXNzIjoiWHVyMzRQMSIsImF1ZCI6Ilh1cjQ0UFAifQ.QD-fcLXtznCfkTIYkbOQfc5fXfxYgw_mOziKWpUHddk", // ✅ pass token here
     })}
+
 
   >
     {item.item_image ? (
