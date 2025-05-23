@@ -213,6 +213,52 @@ const DetailsStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  appraisedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  appraisedLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  appraisedValue: {
+    fontSize: 16,
+    color: '#333',
+  },
+  listerCode: {
+    color: '#666',
+    fontSize: 14,
+  },
+  provenanceItem: {
+    marginBottom: 20,
+  },
+  provenanceHeader: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
+  },
+  provenanceRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  provenanceLabel: {
+    fontSize: 14,
+    color: '#666',
+  },
+  provenanceValue: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#333',
+  },
+  provenanceDivider: {
+    height: 1,
+    backgroundColor: '#eee',
+    marginVertical: 10,
+  },
 });
 
 export default DetailsStyles;

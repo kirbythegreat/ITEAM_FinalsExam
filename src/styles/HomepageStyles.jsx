@@ -41,7 +41,7 @@ const HomepageStyles = StyleSheet.create({
   filterText: {
     fontSize: 16,
     color: '#b39369',
-    fontWeight: 600,
+    fontWeight: '600',
   },
   listContainer: {
     paddingBottom: 80,
@@ -184,19 +184,25 @@ const HomepageStyles = StyleSheet.create({
     color: '#b39369',
     fontSize: 16,
   },
-overlay: {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.2)', // semi-transparent black
-  zIndex: 1,
-},
 
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    zIndex: 1,
+  },
+  overlayTouchable: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#00000044',
+  },
 
   sidebar: {
-    width:  '75%',
+    width: '75%',
     backgroundColor: '#fff',
     paddingHorizontal: 16,
     paddingVertical: 24,
@@ -205,12 +211,6 @@ overlay: {
     shadowOffset: { width: -2, height: 0 },
     shadowRadius: 6,
     elevation: 8,
-  },
-  overlayTouchable: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#00000044',
   },
   sidebarHeader: {
     flexDirection: 'row',
@@ -229,7 +229,7 @@ overlay: {
     paddingHorizontal: 10,
   },
   filterSection: {
-    marginBottom: 24,
+    marginBottom: 20,
   },
   filterSubtitle: {
     fontSize: 16,
@@ -297,47 +297,29 @@ overlay: {
     fontSize: 13,
     color: '#333',
   },
-filterActions: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  paddingHorizontal: 16,
-  paddingVertical: 20,
-  borderTopWidth: 1,
-  borderColor: '#ddd',
-  backgroundColor: '#fff',
-},
-
-clearButton: {
-  flex: 1,
-  marginRight: 8,
-  padding: 12,
-  borderRadius: 8,
-  borderWidth: 1,
-  borderColor: '#b39369',
-  backgroundColor: '#fff',
-  alignItems: 'center',
-},
-
-clearButtonText: {
-  color: '#b39369',
-  fontWeight: 'bold',
-},
-
-
-applyButton: {
-  flex: 1,
-  marginLeft: 8,
-  padding: 12,
-  borderRadius: 8,
-  backgroundColor: '#b39369',
-  alignItems: 'center',
-},
-
-applyButtonText: {
-  color: '#fff',
-  fontWeight: 'bold',
-},
-
+  rangeInputs: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  rangeInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    padding: 10,
+    marginHorizontal: 5,
+    textAlign: 'center',
+  },
+  filterActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderColor: '#ddd',
+    backgroundColor: '#fff',
+  },
   clearButton: {
     flex: 1,
     backgroundColor: '#eee',
@@ -363,9 +345,47 @@ applyButtonText: {
     fontWeight: '600',
     textAlign: 'center',
   },
-
+  dropdown: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 10,
+    marginBottom: 10,
+    
+  },
+  dropdownText: {
+    fontSize: 16,
+    color: '#333',
+    textAlign: 'center',
+    
+  },
+  dropdownArrow: {
+    fontSize: 18,
+    color: '#555',
+  },
+  dropdownMenu: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginTop: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 4,
+    textAlign: 'center',  
+  },
+  dropdownItem: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  dropdownItemText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  
 });
-
-
 
 export default HomepageStyles;
