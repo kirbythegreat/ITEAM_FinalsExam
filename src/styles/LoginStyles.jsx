@@ -11,11 +11,10 @@ const LoginStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 10,
-        color: '#000',
+        width: 260,
+        marginBottom: 20,
+        resizeMode: 'contain',
+        alignSelf: 'center',
     },
     subHeader: {
         fontSize: 24,
@@ -41,8 +40,8 @@ const LoginStyles = StyleSheet.create({
     },
     loginButton: {
         height: 50,
-        backgroundColor: '#000',
-        borderRadius: 8,
+        backgroundColor: '#541c89',
+        borderRadius: 39,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 15,
@@ -59,6 +58,8 @@ const LoginStyles = StyleSheet.create({
     linkText: {
         color: '#0066cc',
         fontSize: 16,
+        fontWeight: 600,
+        color: '#b89564',
     },
     signUpContainer: {
         flexDirection: 'row',
@@ -72,6 +73,25 @@ const LoginStyles = StyleSheet.create({
     },
     signUpLink: {
         fontWeight: '600',
+    },
+    outlineButton: {
+        height: 50,
+        borderWidth: 2,
+        borderColor: '#b89564',
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%', // full width of parent
+        marginTop: 10,
+    },
+    outlineButtonText: {
+        color: '#b89564',
+        fontSize: 16,
+        fontWeight: '600',
+    },
+    signUpContainer: {
+        alignItems: 'center',
+        marginTop: 20,
     },
 });
 

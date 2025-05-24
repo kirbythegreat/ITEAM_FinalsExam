@@ -11,6 +11,7 @@ import {
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import DetailsStyles from '../styles/DetailsStyles';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function Details({ route, navigation }) {
   const {
@@ -249,7 +250,9 @@ export default function Details({ route, navigation }) {
     <View style={DetailsStyles.container}>
       <View style={DetailsStyles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={DetailsStyles.backButton}>
-          <Text style={DetailsStyles.backButtonText}>←</Text>
+          <View style={DetailsStyles.backButtonCircle}>
+            <Icon name="arrow-back" size={24} color="#000" />
+          </View>
         </TouchableOpacity>
         <Text style={DetailsStyles.headerTitle}>Item Details</Text>
         <View style={DetailsStyles.headerRight} />
@@ -273,7 +276,7 @@ export default function Details({ route, navigation }) {
           <Image
             source={{ uri: details.item_images[0].image_link }}
             style={DetailsStyles.image}
-            resizeMode="contain"
+            resizeMode="cover"
           />
         ) : (
           <View style={[DetailsStyles.image, DetailsStyles.placeholderImage]}>
@@ -294,14 +297,14 @@ export default function Details({ route, navigation }) {
           </ScrollView>
         )}
 
-        <View style={DetailsStyles.contentContainer}>
+        <View style={DetailsStyles.InfoContainer}>
           <Text style={DetailsStyles.title}>
             {itemDetail.item_name || itemDetail.model}
             {itemDetail.category && ` (${itemDetail.category})`}
           </Text>
-          <View style={DetailsStyles.contentContainer}>
-            <Text style={DetailsStyles.title}>
-            {itemDetail.brand}
+          <View style={DetailsStyles.detailContailer}>
+            <Text style={DetailsStyles.brand}>
+              {itemDetail.brand}
             </Text>
           </View>
           <View style={DetailsStyles.priceContainer}>
@@ -311,9 +314,6 @@ export default function Details({ route, navigation }) {
           </View>
 
           <View style={DetailsStyles.listerContainer}>
-            <View style={DetailsStyles.listerHeader}>
-              <Text style={DetailsStyles.listerHeaderText}>Seller Information</Text>
-            </View>
             <View style={DetailsStyles.listerContent}>
               <Image
                 source={{

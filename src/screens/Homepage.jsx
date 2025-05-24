@@ -5,6 +5,8 @@ import HomepageStyles from '../styles/HomepageStyles';
 import { getListings } from '../../api';
 import Modal from 'react-native-modal';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import FontAwesoneIcon from 'react-native-vector-icons/FontAwesome'
 
 const Homepage = ({ route, navigation }) => {
   const [items, setItems] = useState([]);
@@ -327,8 +329,18 @@ const Homepage = ({ route, navigation }) => {
   return (
     <View style={HomepageStyles.container} testID="homepage">
       <View style={HomepageStyles.header}>
-        <Text style={HomepageStyles.headerTitle}>The Xchange</Text>
+        <View style={HomepageStyles.headerContent}>
+          <Text style={HomepageStyles.headerTitle}>The Xchange</Text>
+          <TouchableOpacity onPress={() => console.log('Notification pressed')}>
+            <View style={HomepageStyles.notificationWrapper}>
+              <Icon name="notifications-none" size={28} color="#c5c5c5" />
+              <View style={HomepageStyles.notificationBadge} />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
+
+
 
       <View style={HomepageStyles.searchContainer}>
         <TextInput
@@ -348,12 +360,17 @@ const Homepage = ({ route, navigation }) => {
         </View>
       )}
 
-      <View style={HomepageStyles.sectionHeader}>
-        <Text style={HomepageStyles.sectionTitle}>Daily Discovery</Text>
-          <TouchableOpacity onPress={openFilterSidebar}>
-            <Text style={HomepageStyles.filterText}>Filter</Text>
-          </TouchableOpacity>
-      </View>
+<View style={HomepageStyles.sectionHeader}>
+  <Text style={HomepageStyles.sectionTitle}>Daily Discovery</Text>
+  
+  <TouchableOpacity onPress={openFilterSidebar} style={HomepageStyles.filterButton}>
+    <View style={HomepageStyles.filterContent}>
+      <Text style={HomepageStyles.filterText}>Filter</Text>
+      <Icon name="filter-list" size={20} color="#b39369" style={HomepageStyles.filterIcon} />
+    </View>
+  </TouchableOpacity>
+</View>
+
 
       {filterVisible && (
         <View style={HomepageStyles.overlay}>
@@ -546,12 +563,22 @@ const Homepage = ({ route, navigation }) => {
 
       <View style={HomepageStyles.bottomNavContainer}>
         <View style={HomepageStyles.bottomNav}>
+
           {['Xhibit', 'Xchange', '', 'Records', 'Profile'].map((label, index) => {
             if (label === '') {
               return (
                 <View key="spacer" style={HomepageStyles.spacer} />
               );
             }
+
+            // Define icon names per label
+            const icons = {
+              Xhibit: 'note',
+              Xchange: 'store',
+              Records: 'inventory',
+              Profile: 'person'
+            };
+
             return (
               <TouchableOpacity
                 key={label}
@@ -559,6 +586,12 @@ const Homepage = ({ route, navigation }) => {
                 onPress={() => console.log(`${label} pressed`)}
                 testID={`${label.toLowerCase()}-button`}
               >
+              <Icon
+                name={icons[label]}
+                size={30} // Increased size
+                color={label === 'Xchange' ? '#ad8a5b' : '#888'}
+                style={HomepageStyles.navIcon}
+              />
                 <Text style={[
                   HomepageStyles.navText,
                   label === 'Xchange' && HomepageStyles.activeNavText
@@ -576,7 +609,11 @@ const Homepage = ({ route, navigation }) => {
           testID="post-button"
         >
           <View style={HomepageStyles.postIconCircle}>
-            <Text style={HomepageStyles.postIconText}>XURE</Text>
+            <Image
+              source={require('../icons/XureButton.png')} // Update path as needed
+              style={HomepageStyles.postIconImage}
+              resizeMode="contain"
+            />
           </View>
         </TouchableOpacity>
       </View>

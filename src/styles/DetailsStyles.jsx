@@ -24,11 +24,16 @@ const DetailsStyles = StyleSheet.create({
     borderBottomColor: '#e1e1e1',
   },
   backButton: {
-    padding: 5,
+    padding: 2,
   },
-  backButtonText: {
-    fontSize: 24,
-    color: '#333',
+  backButtonCircle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    borderWidth: 3,
+    borderColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerTitle: {
     fontSize: 18,
@@ -42,6 +47,7 @@ const DetailsStyles = StyleSheet.create({
     width: '100%',
     height: 300,
     backgroundColor: '#f5f5f5',
+    alignSelf: 'stretch',
   },
   placeholderImage: {
     justifyContent: 'center',
@@ -53,19 +59,31 @@ const DetailsStyles = StyleSheet.create({
     fontSize: 16,
   },
   contentContainer: {
-    padding: 20,
     backgroundColor: '#fff',
   },
+  InfoContainer: {
+    padding: 20,
+    backgroundColor: '#fff'
+  },
+  detailContainer: {
+    padding: 0,
+    margin: 0,
+  },
   title: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: '#818181',
+    textAlign: 'left',
+  },
+  brand: {
+    fontSize: 24,
+    fontWeight: '400',
     color: '#333',
+    textAlign: 'left',
   },
   priceContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
     marginBottom: 20,
+    alignItems: 'left',
   },
   priceLabel: {
     fontSize: 16,
@@ -79,24 +97,20 @@ const DetailsStyles = StyleSheet.create({
   },
   listerContainer: {
     marginBottom: 20,
-    borderRadius: 8,
+
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#e1e1e1',
   },
   listerHeader: {
     backgroundColor: '#f5f5f5',
     padding: 12,
   },
-  listerHeaderText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
   listerContent: {
     flexDirection: 'row',
     padding: 15,
     backgroundColor: '#fff',
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: '#e1e1e1',
   },
   avatar: {
     width: 60,

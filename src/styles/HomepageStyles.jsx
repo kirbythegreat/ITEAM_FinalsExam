@@ -19,8 +19,8 @@ const HomepageStyles = StyleSheet.create({
     marginBottom: 20,
   },
   searchInput: {
-    height: 40,
-    borderWidth: 1,
+    height: 'auto',
+    borderWidth: 2,
     borderColor: '#ddd',
     borderRadius: 8,
     paddingHorizontal: 16,
@@ -42,6 +42,14 @@ const HomepageStyles = StyleSheet.create({
     fontSize: 16,
     color: '#b39369',
     fontWeight: '600',
+  },
+  filterContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  filterIcon: {
+    marginLeft: 6,
   },
   listContainer: {
     paddingBottom: 80,
@@ -144,17 +152,17 @@ const HomepageStyles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopWidth: 1,
     borderTopColor: '#ddd',
-    paddingVertical: 10,
+    height: 70, // Fixed height for proper alignment
+    justifyContent: 'center',
   },
   bottomNav: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly', // Changed from space-around
     alignItems: 'center',
-    paddingHorizontal: 16,
   },
   navButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   navText: {
     fontSize: 14,
@@ -169,22 +177,22 @@ const HomepageStyles = StyleSheet.create({
   },
   floatingPostButton: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 30,
     alignSelf: 'center',
   },
   postIconCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 70,
+    height: 70,
+    borderRadius: 50,
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 5,
   },
-  postIconText: {
-    color: '#b39369',
-    fontSize: 16,
+  postIconImage: {
+    width: 32,    // Adjust based on your design
+    height: 32,
   },
-
   overlay: {
     position: 'absolute',
     top: 0,
@@ -211,6 +219,25 @@ const HomepageStyles = StyleSheet.create({
     shadowOffset: { width: -2, height: 0 },
     shadowRadius: 6,
     elevation: 8,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  notificationWrapper: {
+    position: 'relative',
+    padding: 4,
+  },
+  notificationBadge: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 10,
+    height: 10,
+    borderRadius: 50,
+    backgroundColor: '#ceae7b',
   },
   sidebarHeader: {
     flexDirection: 'row',

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import LoginStyles from '../styles/LoginStyles';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Login() {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const handleLogin = async () => {
   try {
@@ -15,7 +18,7 @@ export default function Login() {
       'https://pk9blqxffi.execute-api.us-east-1.amazonaws.com/xdeal/LoginXpert',
       {
         version_number: '2.2.6',
-        Username: username,  // match what API expects
+        Username: username,
         Password: password,
         app_name: 'xtore',
       },
@@ -47,12 +50,12 @@ export default function Login() {
       style={LoginStyles.container}
     >
       <View style={LoginStyles.innerContainer}>
-        <Text style={LoginStyles.header}>XURE</Text>
+        <Image source={require('../icons/XureLogo2.png')} style={LoginStyles.header} />
         <Text style={LoginStyles.subHeader}>Sign In</Text>
 
         <TextInput
           style={LoginStyles.input}
-          placeholder="Enter your username"
+          placeholder="Email address or username"
           placeholderTextColor="#999"
           value={username}
           onChangeText={setUsername}
@@ -60,14 +63,32 @@ export default function Login() {
         />
 
 
-        <TextInput
-          style={LoginStyles.input}
-          placeholder="Enter your password"
-          placeholderTextColor="#999"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+        <View style={{ position: 'relative' }}>
+          <TextInput
+            style={LoginStyles.input}
+            placeholder="Password"
+            placeholderTextColor="#999"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+            style={{
+              position: 'absolute',
+              right: 15,
+              top: 8,
+              padding: 5,
+            }}
+          >
+            <Icon
+              name={showPassword ? 'visibility' : 'visibility-off'}
+              size={24}
+              color="#868686"
+            />
+          </TouchableOpacity>
+        </View>
+
 
         <TouchableOpacity style={LoginStyles.loginButton} onPress={handleLogin}>
           <Text style={LoginStyles.loginButtonText}>Login</Text>
@@ -79,10 +100,11 @@ export default function Login() {
 
         <View style={LoginStyles.signUpContainer}>
           <Text style={LoginStyles.signUpText}>Don't have an account?</Text>
-          <TouchableOpacity>
-            <Text style={[LoginStyles.linkText, LoginStyles.signUpLink]}>Create an Account</Text>
+          <TouchableOpacity style={LoginStyles.outlineButton}>
+            <Text style={LoginStyles.outlineButtonText}>Create an Account</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     </KeyboardAvoidingView>
   );
