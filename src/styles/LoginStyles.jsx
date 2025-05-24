@@ -1,10 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 const LoginStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
+container: {
+  flex: 1,
+  backgroundColor: '#fff',
+},
+
+wrapper: {
+  flex: 1,
+  padding: 20,
+  justifyContent: 'space-between', // Pushes footer to the bottom
+},
     innerContainer: {
         flex: 1,
         padding: 20,
@@ -12,6 +18,7 @@ const LoginStyles = StyleSheet.create({
     },
     header: {
         width: 260,
+        marginTop: 100,
         marginBottom: 20,
         resizeMode: 'contain',
         alignSelf: 'center',
@@ -61,11 +68,10 @@ const LoginStyles = StyleSheet.create({
         fontWeight: 600,
         color: '#b89564',
     },
-    signUpContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: 20,
-    },
+signUpContainer: {
+  alignItems: 'center',
+},
+
     signUpText: {
         color: '#666',
         fontSize: 16,

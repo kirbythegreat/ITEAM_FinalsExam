@@ -273,6 +273,114 @@ const DetailsStyles = StyleSheet.create({
     backgroundColor: '#eee',
     marginVertical: 10,
   },
+
+  specCard: {
+  backgroundColor: '#fff',
+  borderRadius: 8,
+  padding: 16,
+  marginTop: 16,
+  marginBottom: 16,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 1 },
+  shadowOpacity: 0.1,
+  shadowRadius: 2,
+  elevation: 2,
+},
+specRow: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingVertical: 8,
+},
+specName: {
+  fontSize: 14,
+  color: '#666',
+  fontWeight: '500',
+},
+specValue: {
+  fontSize: 14,
+  color: '#333',
+  fontWeight: '600',
+  textAlign: 'right',
+  flex: 1,
+},
+specDivider: {
+  height: 1,
+  backgroundColor: '#eee',
+  marginVertical: 4,
+},
+
+descCard: {
+  backgroundColor: '#fff',
+  borderRadius: 8,
+  padding: 16,
+  marginTop: 16,
+  marginBottom: 16,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 1 },
+  shadowOpacity: 0.1,
+  shadowRadius: 2,
+  elevation: 2,
+},
+descTitle: {
+  fontSize: 16,
+  fontWeight: '600',
+  color: '#333',
+  marginBottom: 8,
+},
+descDivider: {
+  height: 1,
+  backgroundColor: '#eee',
+  marginBottom: 12,
+},
+description: {
+  fontSize: 14,
+  lineHeight: 22,
+  color: '#444',
+},
+
+provenanceContainer: {
+  marginBottom: 16,
+  marginTop: 16,
+},
+provenanceCard: {
+  backgroundColor: '#fff',
+  borderRadius: 8,
+  padding: 16,
+  marginBottom: 12,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 1 },
+  shadowOpacity: 0.1,
+  shadowRadius: 2,
+  elevation: 2,
+},
+provenanceHeader: {
+  fontSize: 16,
+  fontWeight: '600',
+  color: '#333',
+  marginBottom: 12,
+},
+provenanceRow: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginBottom: 10,
+  paddingHorizontal: 4,
+},
+provenanceLabel: {
+  fontSize: 14,
+  color: '#666',
+  fontWeight: '500',
+},
+provenanceValue: {
+  fontSize: 14,
+  fontWeight: '500',
+  color: '#333',
+  textAlign: 'right',
+},
+provenanceDivider: {
+  height: 1,
+  backgroundColor: '#eee',
+  marginBottom: 12,
+},
 });
 
 export default DetailsStyles;

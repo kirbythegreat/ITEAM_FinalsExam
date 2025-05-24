@@ -45,67 +45,69 @@ export default function Login() {
 
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={LoginStyles.container}
-    >
-      <View style={LoginStyles.innerContainer}>
-        <Image source={require('../icons/XureLogo2.png')} style={LoginStyles.header} />
-        <Text style={LoginStyles.subHeader}>Sign In</Text>
+<KeyboardAvoidingView
+  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+  style={LoginStyles.container}
+>
+  <View style={LoginStyles.wrapper}>
+    {/* Centered form */}
+    <View style={LoginStyles.innerContainer}>
+      <Image source={require('../icons/XureLogo2.png')} style={LoginStyles.header} />
+      <Text style={LoginStyles.subHeader}>Sign In</Text>
 
+      <TextInput
+        style={LoginStyles.input}
+        placeholder="Email address or username"
+        placeholderTextColor="#999"
+        value={username}
+        onChangeText={setUsername}
+        autoCapitalize="none"
+      />
+
+      <View style={{ position: 'relative' }}>
         <TextInput
           style={LoginStyles.input}
-          placeholder="Email address or username"
+          placeholder="Password"
           placeholderTextColor="#999"
-          value={username}
-          onChangeText={setUsername}
-          autoCapitalize="none"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
         />
-
-
-        <View style={{ position: 'relative' }}>
-          <TextInput
-            style={LoginStyles.input}
-            placeholder="Password"
-            placeholderTextColor="#999"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={!showPassword}
+        <TouchableOpacity
+          onPress={() => setShowPassword(!showPassword)}
+          style={{
+            position: 'absolute',
+            right: 15,
+            top: 8,
+            padding: 5,
+          }}
+        >
+          <Icon
+            name={showPassword ? 'visibility' : 'visibility-off'}
+            size={24}
+            color="#868686"
           />
-          <TouchableOpacity
-            onPress={() => setShowPassword(!showPassword)}
-            style={{
-              position: 'absolute',
-              right: 15,
-              top: 8,
-              padding: 5,
-            }}
-          >
-            <Icon
-              name={showPassword ? 'visibility' : 'visibility-off'}
-              size={24}
-              color="#868686"
-            />
-          </TouchableOpacity>
-        </View>
-
-
-        <TouchableOpacity style={LoginStyles.loginButton} onPress={handleLogin}>
-          <Text style={LoginStyles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={LoginStyles.forgotPassword}>
-          <Text style={LoginStyles.linkText}>Forgot Password?</Text>
-        </TouchableOpacity>
-
-        <View style={LoginStyles.signUpContainer}>
-          <Text style={LoginStyles.signUpText}>Don't have an account?</Text>
-          <TouchableOpacity style={LoginStyles.outlineButton}>
-            <Text style={LoginStyles.outlineButtonText}>Create an Account</Text>
-          </TouchableOpacity>
-        </View>
-
       </View>
-    </KeyboardAvoidingView>
+
+      <TouchableOpacity style={LoginStyles.loginButton} onPress={handleLogin}>
+        <Text style={LoginStyles.loginButtonText}>Login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={LoginStyles.forgotPassword}>
+        <Text style={LoginStyles.linkText}>Forgot Password?</Text>
+      </TouchableOpacity>
+    </View>
+
+    {/* Pinned footer */}
+    <View style={LoginStyles.signUpContainer}>
+      <Text style={LoginStyles.signUpText}>Don't have an account?</Text>
+      <TouchableOpacity style={LoginStyles.outlineButton}>
+        <Text style={LoginStyles.outlineButtonText}>Create an Account</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</KeyboardAvoidingView>
+
   );
 }
