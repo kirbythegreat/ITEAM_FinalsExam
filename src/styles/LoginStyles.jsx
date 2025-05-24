@@ -68,7 +68,7 @@ const LoginStyles = StyleSheet.create({
         color: '#b89564',
     },
     signUpContainer: {
-    alignItems: 'center',
+        alignItems: 'center',
     },
     signUpText: {
         color: '#666',
@@ -97,6 +97,31 @@ const LoginStyles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20,
     },
+    loadingLogo: {
+        height: 200,
+        width: 200,
+        resizeMode: 'contain', 
+    },
+    loadingOverlay: {
+    ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 1,
+    },
+    contentContainer: {
+        flex: 1,
+        justifyContent: 'space-between',
+    },
+
+    footer: {
+        paddingHorizontal: 20,
+        paddingVertical: 30,
+        alignItems: 'center',
+        borderTopColor: '#eee',
+        backgroundColor: '#fff',
+    },
+
 });
 
 export default LoginStyles;
