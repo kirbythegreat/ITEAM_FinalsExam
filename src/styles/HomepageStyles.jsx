@@ -157,7 +157,7 @@ const HomepageStyles = StyleSheet.create({
   },
   bottomNav: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly', // Changed from space-around
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   navButton: {
@@ -190,7 +190,7 @@ const HomepageStyles = StyleSheet.create({
     elevation: 5,
   },
   postIconImage: {
-    width: 32,    // Adjust based on your design
+    width: 32,
     height: 32,
   },
   overlay: {

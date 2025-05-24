@@ -50,7 +50,6 @@ export default function Login() {
   style={LoginStyles.container}
 >
   <View style={LoginStyles.wrapper}>
-    {/* Centered form */}
     <View style={LoginStyles.innerContainer}>
       <Image source={require('../icons/XureLogo2.png')} style={LoginStyles.header} />
       <Text style={LoginStyles.subHeader}>Sign In</Text>
@@ -99,7 +98,6 @@ export default function Login() {
       </TouchableOpacity>
     </View>
 
-    {/* Pinned footer */}
     <View style={LoginStyles.signUpContainer}>
       <Text style={LoginStyles.signUpText}>Don't have an account?</Text>
       <TouchableOpacity style={LoginStyles.outlineButton}>

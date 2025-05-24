@@ -97,7 +97,6 @@ export default function Details({ route, navigation }) {
       };
     }
 
-    // Filter out the Currency specification
     const filteredSpecification = (apiDetails.specification || []).filter(
       spec => spec.label !== 'Currency'
     );
@@ -394,79 +393,77 @@ export default function Details({ route, navigation }) {
           )}
 
           <TouchableOpacity
-  style={DetailsStyles.sectionHeader}
-  onPress={() => toggleSection('provenance')}
-  activeOpacity={0.8}
->
-  <Text style={DetailsStyles.sectionHeaderText}>Provenance</Text>
-  <Text style={DetailsStyles.sectionToggle}>
-    {expandedSections.provenance ? '−' : '+'}
-  </Text>
-</TouchableOpacity>
+            style={DetailsStyles.sectionHeader}
+            onPress={() => toggleSection('provenance')}
+            activeOpacity={0.8}
+          >
+            <Text style={DetailsStyles.sectionHeaderText}>Provenance</Text>
+            <Text style={DetailsStyles.sectionToggle}>
+              {expandedSections.provenance ? '−' : '+'}
+            </Text>
+          </TouchableOpacity>
 
-{expandedSections.provenance && (
-  <View style={DetailsStyles.provenanceContainer}>
-    {details.provenance?.length > 0 ? (
-      <>
-        {/* Registration Card */}
-        <View style={DetailsStyles.provenanceCard}>
-          <Text style={DetailsStyles.provenanceHeader}>Registration</Text>
-          <View style={DetailsStyles.provenanceDivider} />
-          
-          <View style={DetailsStyles.provenanceRow}>
-            <Text style={DetailsStyles.provenanceLabel}>Date</Text>
-            <Text style={DetailsStyles.provenanceValue}>
-              {formatDate(details.provenance[0].date_created)}
-            </Text>
-          </View>
-          <View style={DetailsStyles.provenanceRow}>
-            <Text style={DetailsStyles.provenanceLabel}>Registered by</Text>
-            <Text style={DetailsStyles.provenanceValue}>
-              {details.provenance[0].created_by_name || 'Unknown'}
-            </Text>
-          </View>
-        </View>
-
-        {/* Certification Card */}
-        <View style={DetailsStyles.provenanceCard}>
-          <Text style={DetailsStyles.provenanceHeader}>Certification</Text>
-          <View style={DetailsStyles.provenanceDivider} />
-          
-          <View style={DetailsStyles.provenanceRow}>
-            <Text style={DetailsStyles.provenanceLabel}>Date</Text>
-            <Text style={DetailsStyles.provenanceValue}>
-              {formatDate(details.provenance[1]?.date_created)}
-            </Text>
-          </View>
-          <View style={DetailsStyles.provenanceRow}>
-            <Text style={DetailsStyles.provenanceLabel}>Type</Text>
-            <Text style={DetailsStyles.provenanceValue}>
-              {details.provenance[1]?.provenance_type || 'N/A'}
-            </Text>
-          </View>
-          <View style={DetailsStyles.provenanceRow}>
-            <Text style={DetailsStyles.provenanceLabel}>Certified by</Text>
-            <Text style={DetailsStyles.provenanceValue}>
-              {details.provenance[1]?.created_by_name || 'Unknown'}
-            </Text>
-          </View>
-          <View style={DetailsStyles.provenanceRow}>
-            <Text style={DetailsStyles.provenanceLabel}>Control Number</Text>
-            <Text style={DetailsStyles.provenanceValue}>
-              {details.provenance[1]?.control_number || 'N/A'}
-            </Text>
-          </View>
-        </View>
-      </>
-    ) : (
-      <View style={DetailsStyles.provenanceCard}>
-        <Text style={DetailsStyles.noDataText}>
-          No provenance information available
-        </Text>
-      </View>
-    )}
-  </View>
-)}
+          {expandedSections.provenance && (
+            <View style={DetailsStyles.provenanceContainer}>
+              {details.provenance?.length > 0 ? (
+                <>
+                  <View style={DetailsStyles.provenanceCard}>
+                    <Text style={DetailsStyles.provenanceHeader}>Registration</Text>
+                    <View style={DetailsStyles.provenanceDivider} />
+                    
+                    <View style={DetailsStyles.provenanceRow}>
+                      <Text style={DetailsStyles.provenanceLabel}>Date</Text>
+                      <Text style={DetailsStyles.provenanceValue}>
+                        {formatDate(details.provenance[0].date_created)}
+                      </Text>
+                    </View>
+                    <View style={DetailsStyles.provenanceRow}>
+                      <Text style={DetailsStyles.provenanceLabel}>Registered by</Text>
+                      <Text style={DetailsStyles.provenanceValue}>
+                        {details.provenance[0].created_by_name || 'Unknown'}
+                      </Text>
+                    </View>
+                  </View>
+                  
+                  <View style={DetailsStyles.provenanceCard}>
+                    <Text style={DetailsStyles.provenanceHeader}>Certification</Text>
+                    <View style={DetailsStyles.provenanceDivider} />
+                    
+                    <View style={DetailsStyles.provenanceRow}>
+                      <Text style={DetailsStyles.provenanceLabel}>Date</Text>
+                      <Text style={DetailsStyles.provenanceValue}>
+                        {formatDate(details.provenance[1]?.date_created)}
+                      </Text>
+                    </View>
+                    <View style={DetailsStyles.provenanceRow}>
+                      <Text style={DetailsStyles.provenanceLabel}>Type</Text>
+                      <Text style={DetailsStyles.provenanceValue}>
+                        {details.provenance[1]?.provenance_type || 'N/A'}
+                      </Text>
+                    </View>
+                    <View style={DetailsStyles.provenanceRow}>
+                      <Text style={DetailsStyles.provenanceLabel}>Certified by</Text>
+                      <Text style={DetailsStyles.provenanceValue}>
+                        {details.provenance[1]?.created_by_name || 'Unknown'}
+                      </Text>
+                    </View>
+                    <View style={DetailsStyles.provenanceRow}>
+                      <Text style={DetailsStyles.provenanceLabel}>Control Number</Text>
+                      <Text style={DetailsStyles.provenanceValue}>
+                        {details.provenance[1]?.control_number || 'N/A'}
+                      </Text>
+                    </View>
+                  </View>
+                </>
+              ) : (
+                <View style={DetailsStyles.provenanceCard}>
+                  <Text style={DetailsStyles.noDataText}>
+                    No provenance information available
+                  </Text>
+                </View>
+              )}
+            </View>
+          )}
 
           {error && (
             <View style={DetailsStyles.apiErrorContainer}>

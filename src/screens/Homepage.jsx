@@ -190,7 +190,7 @@ const Homepage = ({ route, navigation }) => {
       style={HomepageStyles.itemContainer}
       testID={`item-${item.listing_id}`}
       onPress={() => navigation.navigate('Details', {
-        product: item, // Pass the entire product object
+        product: item,
         item_id: item.item_id,
         listing_id: item.listing_id,
         current_owner_id: item.owner_id,
@@ -258,21 +258,17 @@ const Homepage = ({ route, navigation }) => {
         }
       >
         <SkeletonPlaceholder borderRadius={4}>
-          {/* Header Title */}
           <View style={{ width: '100%', height: 50, justifyContent: 'center', paddingHorizontal: 20 }}>
             <View style={{ width: 120, height: 24 }} />
           </View>
 
-          {/* Search Bar */}
           <View style={{ width: '90%', height: 40, borderRadius: 8, marginHorizontal: '5%', marginBottom: 20 }} />
 
-          {/* Daily Discovery + Filter Text */}
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginBottom: 10 }}>
             <View style={{ width: 150, height: 20 }} />
             <View style={{ width: 60, height: 20 }} />
           </View>
 
-          {/* Grid Items */}
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingHorizontal: 20 }}>
             {[...Array(4)].map((_, index) => (
               <View key={index} style={{ width: '47%', marginBottom: 20 }}>
@@ -280,8 +276,6 @@ const Homepage = ({ route, navigation }) => {
                 <View style={{ width: '60%', height: 16, marginTop: 8 }} />
                 <View style={{ width: '90%', height: 14, marginTop: 4 }} />
                 <View style={{ width: '50%', height: 14, marginTop: 4 }} />
-
-                {/* Seller row */}
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
                   <View style={{ width: 30, height: 30, borderRadius: 15 }} />
                   <View style={{ width: 60, height: 12, marginLeft: 8 }} />
@@ -290,7 +284,6 @@ const Homepage = ({ route, navigation }) => {
             ))}
           </View>
 
-          {/* Footer Navigation Skeleton */}
           <View style={{ paddingTop: 20, height: 80, justifyContent: 'center' }}>
             <View style={{
               flexDirection: 'row',
@@ -299,19 +292,13 @@ const Homepage = ({ route, navigation }) => {
               marginTop: 10,
               paddingHorizontal: 20
             }}>
-              {/* Left two nav texts */}
               <View style={{ width: 50, height: 12 }} />
               <View style={{ width: 50, height: 12 }} />
-
-              {/* Spacer for center button */}
               <View style={{ width: 50 }} />
-
-              {/* Right two nav texts */}
               <View style={{ width: 50, height: 12 }} />
               <View style={{ width: 50, height: 12 }} />
             </View>
 
-            {/* Floating Circular Button (centered) */}
             <View style={{
               position: 'absolute',
               alignSelf: 'center',
@@ -340,8 +327,6 @@ const Homepage = ({ route, navigation }) => {
         </View>
       </View>
 
-
-
       <View style={HomepageStyles.searchContainer}>
         <TextInput
           style={HomepageStyles.searchInput}
@@ -362,7 +347,6 @@ const Homepage = ({ route, navigation }) => {
 
 <View style={HomepageStyles.sectionHeader}>
   <Text style={HomepageStyles.sectionTitle}>Daily Discovery</Text>
-  
   <TouchableOpacity onPress={openFilterSidebar} style={HomepageStyles.filterButton}>
     <View style={HomepageStyles.filterContent}>
       <Text style={HomepageStyles.filterText}>Filter</Text>
@@ -370,8 +354,6 @@ const Homepage = ({ route, navigation }) => {
     </View>
   </TouchableOpacity>
 </View>
-
-
       {filterVisible && (
         <View style={HomepageStyles.overlay}>
           <TouchableOpacity
@@ -379,14 +361,10 @@ const Homepage = ({ route, navigation }) => {
             onPress={closeFilterSidebar}
             activeOpacity={1}
           />
-        
           <Animated.View style={[HomepageStyles.sidebar, { left: slideAnim, top: 0, height: '100%', position: 'absolute' }]}>
             <ScrollView>
-              {/* Sort Section */}
               <View style={HomepageStyles.filterSection}>
                 <Text style={HomepageStyles.filterSubtitle}>Sort</Text>
-
-                {/* Dropdown Trigger */}
                 <TouchableOpacity
                   style={HomepageStyles.dropdown}
                   onPress={() => setDropdownVisible(prev => !prev)}
@@ -396,8 +374,6 @@ const Homepage = ({ route, navigation }) => {
                   </Text>
                   <Text style={HomepageStyles.dropdownArrow}>▼</Text>
                 </TouchableOpacity>
-
-                {/* Dropdown Options */}
                 {dropdownVisible && (
                   <View style={HomepageStyles.dropdownMenu}>
                     {['Product Name', 'Brand', 'Price', 'Category'].map(option => (
@@ -414,8 +390,6 @@ const Homepage = ({ route, navigation }) => {
                     ))}
                   </View>
                 )}
-
-                {/* ASC / DESC Toggle */}
                 <View style={HomepageStyles.sortOptions}>
                   <TouchableOpacity
                     style={[
@@ -443,8 +417,6 @@ const Homepage = ({ route, navigation }) => {
                   </TouchableOpacity>
                 </View>
               </View>
-
-              {/* Category Section */}
               <View style={HomepageStyles.filterSection}>
                 <Text style={HomepageStyles.filterSubtitle}>Filter by Category</Text>
                 <View style={HomepageStyles.categoryGrid}>
@@ -479,8 +451,6 @@ const Homepage = ({ route, navigation }) => {
                   ))}
                 </View>
               </View>
-        
-              {/* Value Range Section */}
               <View style={HomepageStyles.filterSection}>
                 <Text style={HomepageStyles.filterSubtitle}>Value Range</Text>
                 <View style={HomepageStyles.rangeInputs}>
@@ -519,8 +489,6 @@ const Homepage = ({ route, navigation }) => {
                   })}
                 </View>
               </View>
-        
-              {/* Actions */}
               <View style={HomepageStyles.filterActions}>
                 <TouchableOpacity style={HomepageStyles.clearButton} onPress={() => {
                   setSelectedCategories([]);
@@ -570,8 +538,6 @@ const Homepage = ({ route, navigation }) => {
                 <View key="spacer" style={HomepageStyles.spacer} />
               );
             }
-
-            // Define icon names per label
             const icons = {
               Xhibit: 'note',
               Xchange: 'store',
@@ -588,7 +554,7 @@ const Homepage = ({ route, navigation }) => {
               >
               <Icon
                 name={icons[label]}
-                size={30} // Increased size
+                size={30} 
                 color={label === 'Xchange' ? '#ad8a5b' : '#888'}
                 style={HomepageStyles.navIcon}
               />
@@ -610,7 +576,7 @@ const Homepage = ({ route, navigation }) => {
         >
           <View style={HomepageStyles.postIconCircle}>
             <Image
-              source={require('../icons/XureButton.png')} // Update path as needed
+              source={require('../icons/XureButton.png')}
               style={HomepageStyles.postIconImage}
               resizeMode="contain"
             />
